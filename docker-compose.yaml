@@ -37,3 +37,6 @@ services:
     depends_on:
       - mysql
       - cart
+  rabbitmq:
+    image: viswanadhammanchem/rabbitmq:v1
+    container_name: rabbitmq
