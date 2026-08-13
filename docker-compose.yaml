@@ -40,3 +40,9 @@ services:
   rabbitmq:
     image: viswanadhammanchem/rabbitmq:v1
     container_name: rabbitmq
+  payment:
+    image: viswanadhammanchem/payment:v1
+    container_name: payment
+    depends_on:
+      - rabbitmq
+      - user
