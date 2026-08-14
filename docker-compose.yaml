@@ -45,3 +45,14 @@ services:
     container_name: payment
     depends_on:
       - rabbitmq
+  frontend:
+    image: viswanadhammanchem/frontend:v1
+    container_name: frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - catalogue
+      - user
+      - cart
+      - shipping
+      - payment
