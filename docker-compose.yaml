@@ -8,14 +8,24 @@ services:
     image: viswanadhammanchem/mongodb:v1
     container_name: mongodb
 
+  redis:
+    image: viswanadhammanchem/redis:v1
+    container_name: redis
+
+  mysql:
+    image: viswanadhammanchem/mysql
+    container_name: mysql
+
+  rabbitmq:
+    image: viswanadhammanchem/rabbitmq:v1
+    container_name: rabbitmq
+
   catalogue:
     image: viswanadhammanchem/catalogue:v1
     container_name: catalogue
     depends_on:
     - mongodb
-  redis:
-    image: viswanadhammanchem/redis:v1
-    container_name: redis
+
   user:
     image: viswanadhammanchem/user:v1
     container_name: user
@@ -28,18 +38,14 @@ services:
     depends_on:
     - catalogue
     - redis
-  mysql:
-    image: viswanadhammanchem/mysql
-    container_name: mysql
+  
   shipping:
     image: viswanadhammanchem/shipping:v1
     container_name: shipping
     depends_on:
     - mysql
     - cart
-  rabbitmq:
-    image: viswanadhammanchem/rabbitmq:v1
-    container_name: rabbitmq
+  
   payment:
     image: viswanadhammanchem/payment:v1
     container_name: payment
