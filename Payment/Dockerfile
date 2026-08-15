@@ -10,4 +10,4 @@ ENV CART_HOST="cart" \
     USER_HOST="user" \
     USER_PORT="8080" \
     AMQP_HOST=:-"rabbitmq"
-CMD ["uwsgi", "--ini", "    payment.ini"]
+CMD ["uwsgi","--ini","payment.ini"]
