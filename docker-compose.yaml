@@ -3,22 +3,35 @@ networks:
     driver: bridge
     name: roboshop
     external: true # If you want to use an existing network, set this to true and provide the name of the network. otherwise, set it to false and Docker will create a new network for you.
+volumees:
+  mongodb:
+  redis:
+  mysql:
+  rabbitmq:
 services:
   mongodb:
     image: viswanadhammanchem/mongodb:v1
     container_name: mongodb
+    volumes:
+    - mongodb:/data/db
 
   redis:
     image: viswanadhammanchem/redis:v1
     container_name: redis
+    volumes:
+    - redis:/data
 
   mysql:
     image: viswanadhammanchem/mysql
     container_name: mysql
+    volumes:
+    - mysql:/var/lib/mysql
 
   rabbitmq:
     image: viswanadhammanchem/rabbitmq:v1
     container_name: rabbitmq
+    volumes:
+    - rabbitmq:/var/lib/rabbitmq
 
   catalogue:
     image: viswanadhammanchem/catalogue:v1
