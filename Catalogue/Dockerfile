@@ -1,5 +1,5 @@
 FROM node:22-alpine
-RUN addgroup -s roboshop && adduser -S roboshop -G roboshop 
+RUN addgroup -S roboshop && adduser -S roboshop -G roboshop 
 WORKDIR /app
 RUN chown -R roboshop:roboshop /app
 USER roboshop
