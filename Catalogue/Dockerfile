@@ -1,8 +1,12 @@
 FROM node:22-alpine
+RUN addgroup -s roboshop && adduser -S roboshop -G roboshop 
 WORKDIR /app
+RUN chown -R roboshop:roboshop /app
+USER roboshop
 COPY package.json .
 COPY *.js .
 RUN npm install
+
 ENV MONGO=true \
     MONGO_URL="mongodb://mongodb:27017/catalogue"
 CMD ["node","server.js"]    
