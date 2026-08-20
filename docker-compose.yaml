@@ -3,7 +3,7 @@ networks:
     driver: bridge
     name: roboshop
     external: true # If you want to use an existing network, set this to true and provide the name of the network. otherwise, set it to false and Docker will create a new network for you.
-volumees:
+volumes:
   mongodb:
   redis:
   mysql:
