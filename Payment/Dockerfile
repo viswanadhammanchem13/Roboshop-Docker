@@ -1,11 +1,11 @@
-FROM python:3.9-alpine AS builder
+FROM python:3.10-alpine3.20 AS builder
 WORKDIR /app
 COPY requirements.txt .
 COPY *.py .
 COPY payment.ini .
 RUN pip install -r requirements.txt 
 
-FROM python:3.10-alpine3.23
+FROM python:3.10-alpine3.20
 RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
 WORKDIR /app
 EXPOSE 8080
