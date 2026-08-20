@@ -11,7 +11,7 @@ ENV MONGO=true \
     MONGO_URL="mongodb://mongodb:27017/catalogue" 
 WORKDIR /app
 RUN chown -R roboshop:roboshop /app
-COPY --from=builder /app /app
+COPY --from=builder --chown=roboshop:roboshop /app /app
 USER roboshop    
 CMD ["node","server.js"]    
 
