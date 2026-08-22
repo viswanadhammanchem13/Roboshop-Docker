@@ -4,7 +4,7 @@ COPY pom.xml .
 COPY /src /app/src
 RUN mvn clean package
 
-FROM maven:3.9.16-eclipse-temurin-17
+FROM maven:eclipse-temurin:17-jre-alpine
 EXPOSE 8080
 RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
 ENV CART_ENDPOINT="cart:8080" \
