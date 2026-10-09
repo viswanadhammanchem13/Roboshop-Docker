@@ -1,13 +1,11 @@
 FROM python:3.10-alpine3.20 AS builder
-WORKDIR /app
+WORKDIR /build
+RUN apk add --no-cache python3-dev build-base linux-headers pcre-dev
 COPY requirements.txt .
-COPY *.py .
-COPY payment.ini .
-RUN pip3 install -r requirements.txt 
+RUN pip3 install --no-cache-dir  --prefix=/install -r requirements.txt 
 
 FROM python:3.10-alpine3.20
 EXPOSE 8080
-RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
 WORKDIR /app
 ENV CART_HOST="cart" \
     CART_PORT="8080" \
@@ -16,8 +14,12 @@ ENV CART_HOST="cart" \
     AMQP_HOST="rabbitmq" \
     AMQP_USER=roboshop \
     AMQP_PASS=roboshop123
-COPY --from=builder  /app /app
-USER roboshop    
+RUN apk add --no-cache pcre
+RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
+USER roboshop
+COPY --from=builder /install /usr/local
+COPY --chown=roboshop:roboshop payment.ini .
+COPY --chown=roboshop:roboshop *.py .
 CMD ["uwsgi","--ini","payment.ini"]
 
 # FROM python:3.9
