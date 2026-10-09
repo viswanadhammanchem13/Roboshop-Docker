@@ -3,7 +3,7 @@ WORKDIR /app
 COPY requirements.txt .
 COPY *.py .
 COPY payment.ini .
-RUN pip install -r requirements.txt 
+RUN pip3 install -r requirements.txt 
 
 FROM python:3.10-alpine3.20
 EXPOSE 8080
